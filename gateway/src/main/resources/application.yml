@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+    gateway:
+      routes:
+      - id: test
+        uri: lb://test
+
+        predicates:
+          - Path=/test/**
+        filters:
+          - StripPrefix=1
+      - id: Auth
+        uri: lb://Auth
+
+        predicates:
+            - Path=/Auth/**
+        filters:
+            - StripPrefix=1
+      - id: Core
+        uri: lb://Core
+
+        predicates:
+            - Path=/Core/**
+        filters:
+            - StripPrefix=1
+
+
+
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: donation
+    password: xiaomao2000
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gatewa: debug
+
+
