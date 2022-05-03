@@ -120,9 +120,13 @@ public class LoginTokenFilter implements WebFilter {
      * 解析Token
      */
     public String getToken(String requestHeader) {
+
+
         //2.Cookie中没有从header中获取
         if (requestHeader != null && requestHeader.startsWith(BEARER)) {
             return requestHeader.substring(7);
+        } else if (requestHeader != null) {
+            return requestHeader;
         }
         return "";
     }

@@ -8,3 +8,11 @@ spring:
     password: xiaomao2000
 server:
   port: 8100
+
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gatewa: debug

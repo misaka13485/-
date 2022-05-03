@@ -1,12 +1,12 @@
 package com.zengxuan.core.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zengxuan.core.entity.GoodInfo;
 import com.zengxuan.core.entity.Need;
 import com.zengxuan.core.mapper.GoodInfoMapper;
 import com.zengxuan.core.mapper.NeedMapper;
 import com.zengxuan.core.service.INeedService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,27 +56,13 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper, Need> implements IN
     }
 
 
-
-
-
-
     @Override
-    public String getNeedsById(String id) {
+    public List<Need> getNeedsById(int id) {
+        log.info("查询需求人id为{}的需求", id);
         QueryWrapper<Need> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("needer", id);
-        List<Need> need = needMapper.selectList(queryWrapper);
-        if (need == null){
-            return "没有找到该需求";
-        }else {
-            StringBuilder result = new StringBuilder("{\"data\":[");
-            for (Need need1:need) {
-                result.append(need1.toString()).append(",");
-             }
-            result = new StringBuilder(result.substring(0, result.length() - 1));
-            result.append("]}");
-            return result.toString();
+        return needMapper.selectList(queryWrapper);
 
-            }
-        }
+    }
 
 }

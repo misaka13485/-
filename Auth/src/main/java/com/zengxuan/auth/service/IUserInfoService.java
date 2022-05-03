@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IUserInfoService extends IService<UserInfo> {
 
-    public UserInfo getUserByID(String id);
+    UserInfo getUserByID(String id);
 
     String register(UserInfo userInfo);
 
-    String login(UserInfo userInfo);
+    UserInfo login(UserInfo userInfo);
 
     String logout(UserInfo userInfo);
 }

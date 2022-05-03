@@ -3,6 +3,7 @@ package com.zengxuan.core.controller;
 
 import com.zengxuan.core.dto.DonateForm;
 import com.zengxuan.core.dto.NeedForm;
+import com.zengxuan.core.dto.ResultDto;
 import com.zengxuan.core.service.IDepositoryService;
 import com.zengxuan.core.service.IDonateService;
 import com.zengxuan.core.service.IGoodInfoService;
@@ -23,6 +24,7 @@ import java.util.Objects;
 
 @Api(tags = "核心业务控制器")
 @RestController
+@RequestMapping
 public class CoreController {
 
 
@@ -70,9 +72,12 @@ public class CoreController {
 
     @ApiOperation("查询用户需求")
     @GetMapping("/getNeedsById")
-    public String getNeeds(@RequestHeader(value = "username", required = false) String username,
-                           @RequestHeader(value = "id", required = false) String id) {
-        return needService.getNeedsById(id);
+    public ResultDto getNeeds(@RequestHeader String username,
+                              @RequestHeader int id) {
+
+        ResultDto resultDto = new ResultDto();
+        resultDto.setData(needService.getNeedsById(id));
+        return resultDto;
     }
 
     @ApiOperation("查询用户捐赠")

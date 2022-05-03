@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface IUserService extends IService<User> {
-    public User getUserByID(String id);
-    public User getUserByToken(String token);
+    User getUserByID(String id);
+    User getUserByToken(String token);
 
 
 }

@@ -53,17 +53,8 @@ public class Need implements Serializable {
     @TableField("STATUS")
     private String status;
 
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", needer='" + needer +
-                ", amount=" + amount +
-                ", goodId=" + goodId +
-                ", createTime=" + createTime +
-                ", status='" + status + '\'' +
-                '}';
-    }
+    @TableField("MATCHED")
+    private BigDecimal matched;
 
 
 }

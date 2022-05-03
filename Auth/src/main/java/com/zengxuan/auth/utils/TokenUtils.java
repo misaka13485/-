@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @desc   使用token验证用户是否登录
+ * 使用token验证用户是否登录
  * @author zm
  **/
 @Component

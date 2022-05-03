@@ -10,6 +10,8 @@ import com.zengxuan.auth.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -36,16 +38,23 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     }
 
     @Override
-    public String login(UserInfo userInfo) {
+    public UserInfo login(UserInfo userInfo) {
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username",userInfo.getUsername());
-        queryWrapper.eq("password",userInfo.getUserPassword());
-        UserInfo login= userInfoMapper.selectList(queryWrapper).get(0);
-        if(login==null){
-            return "用户名或密码错误";
+        queryWrapper.eq("NAME",userInfo.getUsername());
+        queryWrapper.eq("USER_PASSWORD",userInfo.getUserPassword());
+        List<UserInfo> login= userInfoMapper.selectList(queryWrapper);
+        if(login.size()==0){
+            throw new RuntimeException("用户名或密码错误");
+        }
+        if(login.size()>1){
+            throw new RuntimeException("数据库异常");
         }
         TokenUtils tokenUtils = new TokenUtils();
-        return tokenUtils.token(login.getId());
+        UserInfo result = login.get(0);
+        result.setToken(tokenUtils.token(result.getId()));
+        result.setUserPassword("");
+        return result;
+
     }
 
     @Override

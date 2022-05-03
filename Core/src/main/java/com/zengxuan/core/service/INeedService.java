@@ -1,9 +1,9 @@
 package com.zengxuan.core.service;
 
-import com.zengxuan.core.dto.NeedForm;
 import com.zengxuan.core.entity.Need;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -18,6 +18,6 @@ public interface INeedService extends IService<Need> {
 
     String addNewNeed(int needer, int goodsId, int amount);
 
-    String getNeedsById(String id);
+    List<Need> getNeedsById(int id);
 
 }

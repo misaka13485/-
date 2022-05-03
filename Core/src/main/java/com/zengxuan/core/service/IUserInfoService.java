@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 public interface IUserInfoService extends IService<UserInfo> {
 
-    public UserInfo getUserByID(String id);
+    UserInfo getUserByID(String id);
 
     String register(UserInfo userInfo);
 
